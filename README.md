@@ -246,9 +246,7 @@ If a formal publication or DOI becomes available, update this citation with the 
 
 ## 13. License
 
-Refer to the [`LICENSE`](https://github.com/abhicse8379/drug-powder-uniformity-dataset/blob/main/LICENSE) file for the applicable terms of use.
-
-Before redistributing the dataset, verify that the license is present in the repository and that you have the necessary rights to share and license all included images.
+No license has been specified for this dataset at present. Unless and until a license is added, all rights remain with the copyright holder. Please contact the repository owner for permission before redistributing, modifying, or using the dataset beyond what is permitted by applicable law.
 
 ## 14. Disclaimer
 

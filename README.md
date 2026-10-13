@@ -111,17 +111,30 @@ print("Validation images:", len(val_dataset))
 
 **Important:** This example assumes that the Training and Validation directories contain the two class folders shown above. The class mapping is determined automatically by `ImageFolder`.
 
-## Testing Data
+## Dataset Statistics
 
-The Testing directory currently contains 140 images. Its structure should be checked before using it for automated evaluation.
+The Drug Powder Uniformity Dataset contains **1,731 microscopic images** distributed across training, validation, and testing subsets.
 
-For compatibility with `torchvision.datasets.ImageFolder`, organize the test images into class-specific subfolders:
+| Dataset Split | Mixed | Not Mixed | Total Images |
+|---|---:|---:|---:|
+| Training | 548 | 633 | 1,181 |
+| Validation | 192 | 218 | 410 |
+| Testing | Not specified | Not specified | 140 |
+| **Total** | **740*** | **851*** | **1,731** |
 
-```text
-Testing/
-├── Mixed/
-└── Not Mixed/
-```
+*Note: The Mixed and Not Mixed totals include only the labeled Training and Validation subsets. The 140 Testing images have not been separated by class in the reported statistics.*
+
+### Dataset Distribution
+
+- **Training set:** 1,181 images
+  - Mixed: 548 images
+  - Not Mixed: 633 images
+- **Validation set:** 410 images
+  - Mixed: 192 images
+  - Not Mixed: 218 images
+- **Testing set:** 140 images
+
+The dataset is designed for developing and evaluating deep-learning models for pharmaceutical powder mixing uniformity classification. The class distribution and image labels should be verified before training and final evaluation.
 
 Only do this when the correct ground-truth labels are available. If the images are unlabeled, use a custom dataset loader instead.
 

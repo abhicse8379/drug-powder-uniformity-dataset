@@ -1,37 +1,164 @@
-# Pharmaceutical Powder Mixing Uniformity Dataset
+# Drug Powder Uniformity Dataset
+
+A microscopic image dataset developed for deep-learning-based classification of pharmaceutical powder mixing uniformity.
 
 ## Overview
-This repository contains microscopic images of pharmaceutical powder samples for research into automated mixing uniformity classification using computer vision and deep learning.
 
-## Classification
-- **Mixed:** Samples labelled as adequately mixed according to the study's defined reference criteria.
-- **Not_Mixed:** Samples labelled as inadequately mixed according to the study's defined reference criteria.
+The **Drug Powder Uniformity Dataset** is intended to support research on automated assessment of pharmaceutical powder mixing using computer vision and deep learning. The dataset contains microscopic images organized into training, validation, and testing subsets.
 
-These labels represent the study's operational criteria and do not independently establish pharmaceutical content uniformity.
+The classification task focuses on distinguishing between:
 
-## Dataset Details
-- **Total images:** [Insert verified count]
-- **Number of classes:** 2
-- **Classes:** Mixed, Not_Mixed
-- **Image format:** [Insert actual format]
-- **Image dimensions:** [Insert actual dimensions]
-- **Microscope magnification:** [Insert actual magnification]
-- **Ground-truth method:** [Describe the laboratory reference procedure]
+- **Mixed:** Powder samples exhibiting characteristics associated with adequate mixing.
+- **Not Mixed:** Powder samples exhibiting characteristics associated with inadequate or non-uniform mixing.
 
-## Repository Structure
-- `images/Mixed/` — images labelled Mixed
-- `images/Not_Mixed/` — images labelled Not_Mixed
-- `metadata.csv` — image-level metadata
-- `DATASET_CARD.md` — detailed dataset documentation
+This dataset can be used to investigate image classification models, data augmentation strategies, feature extraction, and explainable artificial intelligence for pharmaceutical process monitoring.
 
-## Intended Use
-The dataset is intended for academic research on pharmaceutical powder mixing uniformity, image classification, deep learning, multi-colour-space feature fusion, and explainable AI.
+## Dataset Structure
 
-## Limitations
-Results obtained using this dataset may not generalize to other formulations, laboratories, or imaging conditions without independent validation. Model predictions are not a substitute for validated pharmaceutical quality-control procedures.
+```text
+drug-powder-uniformity-dataset/
+├── Testing/
+│   └── Image files
+├── Training/
+│   ├── Mixed/
+│   │   └── Image files
+│   └── Not Mixed/
+│       └── Image files
+└── Validation/
+    ├── Mixed/
+    │   └── Image files
+    └── Not Mixed/
+        └── Image files
+```
+
+**Note:** The Testing directory currently contains 140 images. The Training and Validation directories contain class-specific subfolders.
+
+## Intended Applications
+
+- Pharmaceutical powder mixing uniformity assessment
+- Microscopic image classification
+- Deep learning and computer vision research
+- Comparison of CNN-based classification architectures
+- Data augmentation and model generalization studies
+- Explainable AI for pharmaceutical image analysis
+- Potential applications in pharmaceutical process monitoring
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/abhicse8379/drug-powder-uniformity-dataset.git
+```
+
+### 2. Navigate to the Dataset
+
+```bash
+cd drug-powder-uniformity-dataset
+```
+
+### 3. Install Dependencies
+
+For PyTorch-based experiments, install the required packages:
+
+```bash
+pip install torch torchvision matplotlib scikit-learn pillow
+```
+
+Installation requirements may vary depending on the model and computing environment.
+
+## Loading the Dataset with PyTorch
+
+The following example loads the Training and Validation directories using `ImageFolder`.
+
+```python
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
+
+data_dir = "."
+
+transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.ToTensor()
+])
+
+train_dataset = datasets.ImageFolder(
+    root=f"{data_dir}/Training",
+    transform=transform
+)
+
+val_dataset = datasets.ImageFolder(
+    root=f"{data_dir}/Validation",
+    transform=transform
+)
+
+train_loader = DataLoader(
+    train_dataset,
+    batch_size=32,
+    shuffle=True
+)
+
+val_loader = DataLoader(
+    val_dataset,
+    batch_size=32,
+    shuffle=False
+)
+
+print("Class mapping:", train_dataset.class_to_idx)
+print("Training images:", len(train_dataset))
+print("Validation images:", len(val_dataset))
+```
+
+**Important:** This example assumes that the Training and Validation directories contain the two class folders shown above. The class mapping is determined automatically by `ImageFolder`.
+
+## Testing Data
+
+The Testing directory currently contains 140 images. Its structure should be checked before using it for automated evaluation.
+
+For compatibility with `torchvision.datasets.ImageFolder`, organize the test images into class-specific subfolders:
+
+```text
+Testing/
+├── Mixed/
+└── Not Mixed/
+```
+
+Only do this when the correct ground-truth labels are available. If the images are unlabeled, use a custom dataset loader instead.
+
+## Suggested Research Workflow
+
+1. Inspect the dataset and verify image labels.
+2. Check the distribution of samples across classes and subsets.
+3. Apply suitable preprocessing and training-only data augmentation.
+4. Train and validate CNN-based image classification models.
+5. Evaluate the final model using the held-out test set.
+6. Report accuracy, precision, recall, F1-score, and confusion matrix.
+7. Consider Grad-CAM or other explainability techniques to analyze model predictions.
+
+## Important Considerations
+
+- Keep the test set separate from training and model selection.
+- Avoid data leakage between training, validation, and testing.
+- Ensure that images originating from the same physical sample or acquisition session are assigned appropriately to prevent overly optimistic evaluation.
+- Report dataset size, class distribution, preprocessing, and experimental limitations transparently.
+- Classification results should not be interpreted as proof of pharmaceutical content uniformity without appropriate experimental validation.
 
 ## Citation
-Please cite this repository using its recommended GitHub citation information. A DOI-based citation may be added if the dataset is subsequently archived in a DOI-issuing repository.
+
+If you use this dataset in research, please cite the repository URL:
+
+Abhishek Patel, *Drug Powder Uniformity Dataset*, GitHub repository: https://github.com/abhicse8379/drug-powder-uniformity-dataset
+
+A formal citation can be added when a DOI or associated publication becomes available.
 
 ## License
-See the `LICENSE` file for the applicable reuse terms.
+
+A license has not yet been specified. Please add an appropriate license before permitting redistribution or reuse. Ensure that you have the necessary rights to share the images.
+
+## Disclaimer
+
+This dataset is intended for research and educational purposes. It is not, by itself, a validated pharmaceutical quality-control method or a substitute for appropriate laboratory testing and regulatory requirements.
+
+## Contact
+
+For research-related questions, please contact the repository maintainer through GitHub.
